@@ -1,0 +1,41 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.moiclathy.screencoach'
+    compileSdk 33
+    buildToolsVersion '34.0.0'
+
+    defaultConfig {
+        applicationId 'com.moiclathy.screencoach'
+        minSdk 30
+        targetSdk 33
+        versionCode 1
+        versionName '1.0.0'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    buildTypes {
+        debug {
+            // Keeps the debug APK inspectable while the manual build remains non-debuggable.
+            debuggable true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.compilerArgs += ['-parameters']
+    }
+
+    lint {
+        abortOnError false
+    }
+}
